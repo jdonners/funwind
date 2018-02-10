@@ -12,7 +12,7 @@
          unw_init_local(&cursor, &uc);
          while (unw_step(&cursor) > 0) {
            unw_get_proc_name(&cursor, proc, MAXPROCLEN, &offp);
-           printf ("name = %-40s  offp = %lx\n", proc, (long) offp);
+           printf ("*( %s + 0x%lx)\n", proc, (long) offp);
          }
        }
 

@@ -1,3 +1,5 @@
+funwind_lib: funwind.mod libfunwind.so
+
 funwind.mod: funwind.f90
 	gfortran -c funwind.f90
 

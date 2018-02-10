@@ -21,17 +21,18 @@ gfortran -L{location of libfunwind.so} -lfunwind
 Here's some example output:
 
 ```
-name = __gabriel_MOD_error                       offp = db
-name = __gabriel_MOD_distribution_halo_box       offp = 1d8
-name = __gabriel_MOD_distribution_halo           offp = 5a
-name = MAIN__                                    offp = 16f3
-name = main                                      offp = 34
-name = __libc_start_main                         offp = f0
-name = _start                                    offp = 29
-name =                                           offp = 29
+*( __gabriel_MOD_error + 0xdb)
+*( __gabriel_MOD_distribution_halo_box + 0x1d8)
+*( __gabriel_MOD_distribution_halo + 0x5a)
+*( MAIN__ + 0x16f3)
+*( main + 0x34)
+*( __libc_start_main + 0xf0)
+*( _start + 0x29)
+*(  + 0x29)
 ```
 
-you can then debug your code with gdb:
+which is the name of the routine of each stack frame, and the offset into that routine.
+You can then debug your code with gdb with a simple copy-paste:
 
 ```bash
 donners@donners-Latitude-E7240:~/Software/gabriel$ gdb .libs/bandwidth 
@@ -39,7 +40,7 @@ GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
 Copyright (C) 2016 Free Software Foundation, Inc.
 ...
 Reading symbols from .libs/bandwidth...done.
-(gdb) list *(MAIN__ + 0x16f3)
+(gdb) list *( MAIN__ + 0x16f3)
 0x402bf9 is in ex (bandwidth.f90:68).
 64	  call gabriel_init
 65	  
